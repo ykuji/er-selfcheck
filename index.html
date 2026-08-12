@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12302B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="特性チェック">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>救急版 特性セルフチェック</title>
+<style>
+  :root{
+    --ink:#12302B; --surface:#F6F5F0; --card:#FFFFFF; --accent:#0E7C66;
+    --accent-soft:#E3F0EC; --warn:#C4562A; --warn-soft:#F9EAE2;
+    --muted:#68766F; --line:#DDE3DE;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; background:var(--surface); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
+    display:flex; justify-content:center; min-height:100vh;
+  }
+  .col{width:100%; max-width:430px; padding:0 18px 40px;}
+  .eyebrow{font-size:11px; letter-spacing:.18em; color:var(--accent); font-weight:700; margin-bottom:6px;}
+  h1{font-size:26px; line-height:1.3; margin:0; font-weight:800;}
+  .card{background:var(--card); border-radius:16px; border:1px solid var(--line); padding:18px; margin-bottom:14px;}
+  .note{background:var(--accent-soft); border:none; font-size:12px; line-height:1.8;}
+  .btn{width:100%; background:var(--ink); color:#fff; border:none; border-radius:12px;
+    padding:15px 0; font-size:16px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .ghost{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; padding:8px 4px; font-family:inherit;}
+  .qhead{padding:22px 2px 10px; display:flex; justify-content:space-between; align-items:baseline;}
+  .qnum{font-weight:800; font-size:15px;}
+  .qnum span{color:var(--muted); font-weight:500; font-size:13px;}
+  .stress-tag{font-size:11px; color:var(--warn); font-weight:700; letter-spacing:.08em;}
+  .bar{height:4px; background:var(--line); border-radius:2px; margin-bottom:20px;}
+  .bar>div{height:4px; background:var(--accent); border-radius:2px; transition:width .2s;}
+  .qtext{font-size:16.5px; line-height:1.8; margin:0; font-weight:600;}
+  .qcard{min-height:110px; display:flex; align-items:center;}
+  .opt{width:100%; text-align:left; display:flex; align-items:center; gap:12px;
+    background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:12px;
+    padding:13px 14px; margin-bottom:8px; font-size:14.5px; font-weight:600; cursor:pointer; font-family:inherit;}
+  .opt .n{width:26px; height:26px; border-radius:13px; background:var(--accent-soft); color:var(--accent);
+    display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0;}
+  .opt.sel{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .opt.sel .n{background:#fff; color:var(--ink);}
+  .factor-title{font-size:20px; font-weight:800; margin:4px 0 2px;}
+  .catch{font-size:13.5px; color:var(--accent); font-weight:700; margin-bottom:10px;}
+  .sec{font-size:13px; font-weight:700; margin:0 0 4px;}
+  .sec.warn{color:var(--warn);}
+  ul{margin:0 0 10px; padding-left:18px; font-size:13px; line-height:1.8; color:#2A3B36;}
+  .signs{font-size:13px; line-height:1.8; color:#2A3B36; margin-bottom:10px;}
+  .sbar-row{display:flex; align-items:center; gap:10px; margin-bottom:7px;}
+  .sbar-row .f{width:52px; font-size:12.5px; font-weight:700;}
+  .sbar{flex:1; height:8px; background:#EAE7DF; border-radius:4px;}
+  .sbar>div{height:8px; border-radius:4px; background:var(--accent);}
+  .sbar>div.hot{background:var(--warn);}
+  .sval{width:30px; font-size:12.5px; font-weight:700; text-align:right;}
+  .sval.hot{color:var(--warn);}
+  .foot{font-size:11px; color:var(--muted); line-height:1.8; margin:4px 2px 16px;}
+  .meta{display:flex; align-items:baseline; gap:8px;}
+  .meta .tag{font-size:11px; font-weight:800; color:var(--accent); letter-spacing:.15em;}
+  .meta .pts{font-size:12px; color:var(--muted);}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="col">
+
+  <!-- イントロ -->
+  <div id="intro">
+    <div style="padding:34px 2px 18px">
+      <div class="eyebrow">FUJISAWA SHONANDAI ER</div>
+      <h1>救急版<br>特性セルフチェック</h1>
+      <p style="color:var(--muted); font-size:13.5px; line-height:1.8; margin-top:12px">
+        全35問・約6分。あなたの「学び方の型」と「ストレス下で出やすい反応」を5因子で見える化します。
+      </p>
+    </div>
+    <div class="card">
+      <div style="font-size:13.5px; line-height:1.9">
+        <div style="font-weight:700; margin-bottom:6px">答え方のコツ</div>
+        直感で、1問10秒以内。「そうありたい自分」ではなく<b>「実際の自分」</b>で。
+        「余裕がなくなると…」で始まる質問は、<b>これまでで最も忙しかった時期</b>を思い浮かべて答えてください。
+        ストレス下の反応は誰にでもあります。良い・悪いはありません。
+      </div>
+    </div>
+    <div class="card note">
+      ・結果はこの端末の画面にのみ表示され、<b>保存・送信されません</b><br>
+      ・ローテーション評価・人事評価には一切使用しません<br>
+      ・本ツールはFFS理論(株式会社ヒューマンロジック研究所)の5因子の枠組みを参考に当科が独自作成した教育用ツールで、公式診断とは関係ありません
+    </div>
+    <button class="btn" onclick="start()">はじめる</button>
+  </div>
+
+  <!-- 設問 -->
+  <div id="quiz" class="hidden">
+    <div class="qhead">
+      <span class="qnum">Q<span id="qn">1</span><span> / 35</span></span>
+      <span class="stress-tag hidden" id="stag">忙しかった時期を思い出して</span>
+    </div>
+    <div class="bar"><div id="prog" style="width:0%"></div></div>
+    <div class="card qcard"><p class="qtext" id="qtext"></p></div>
+    <div id="opts"></div>
+    <button class="ghost hidden" id="back" onclick="goBack()">← ひとつ前に戻る</button>
+  </div>
+
+  <!-- 結果 -->
+  <div id="result" class="hidden">
+    <div style="padding:28px 2px 12px">
+      <div class="eyebrow">RESULT</div>
+      <h1 style="font-size:23px">あなたの5因子プロフィール</h1>
+    </div>
+    <div class="card" style="padding-bottom:6px">
+      <svg id="radar" viewBox="0 0 320 260" width="100%"></svg>
+    </div>
+    <div id="topcards"></div>
+    <div class="card" id="stresscard">
+      <div style="font-size:13px; font-weight:800; margin-bottom:10px">
+        ストレス下の反応スコア <span style="font-weight:500; color:var(--muted); font-size:12px">(各因子 3〜15点・12点以上は要注意)</span>
+      </div>
+      <div id="sbars"></div>
+      <div id="salert" class="hidden" style="font-size:12.5px; line-height:1.8; margin-top:8px"></div>
+    </div>
+    <div class="foot">
+      本結果は参考情報です(妥当性未検証・教育用)。正式な型の確認は書籍版FFS診断で行います。
+      結果は保存されていません。スクリーンショットで残す場合は取り扱いにご注意ください。
+    </div>
+    <button class="btn" onclick="restart()">もう一度やる</button>
+  </div>
+</div>
+
+<script>
+const FACTORS = ["保全性","拡散性","受容性","弁別性","凝縮性"];
+const INFO = {
+  "保全性":{catch:"積み上げて確実に伸びるタイプ",
+    learn:["型・手順・チェックリストから入ると安心して伸びる","主訴や手技をひとつずつ完全にしてから横に広げる","初めての対応の前は準備時間を確保する(指導医に「型」を求めてOK)"],
+    signs:"確認の質問が増える/新しい症例を避けたくなる/動きが止まる・萎縮する",
+    care:["負荷を一段戻し、慣れた手順に立ち返る","できるようになったことを言葉にして書き出す","「失敗しても仕組みで守られている」ことを指導医に確認する"]},
+  "拡散性":{catch:"まずやってみて伸びるタイプ",
+    learn:["見学より実践。手を動かした後に理屈で整理すると入る","興味のある症例・手技には自分から手を挙げる","書類・サマリーは締切つきの短いタスクに刻む"],
+    signs:"飽きて集中が切れる/面倒な業務を放置する/投げ出したくなる・反発したくなる",
+    care:["新しい役割や課題を自分から取りに行く","「何がつまらないか」を言語化して指導医に率直に伝える","ルーチンの合間に小さな挑戦を挟む"]},
+  "受容性":{catch:"関係性の中で力を発揮するタイプ",
+    learn:["信頼できる指導医との関係を土台にすると大きく伸びる","「誰かの役に立つ」文脈で学ぶと身につきやすい","タスクの総量は自分では気づきにくい——定期的に棚卸しする"],
+    signs:"限界でも「大丈夫です」と言ってしまう/休憩を取らない/気遣いで消耗する",
+    care:["抱えている仕事を書き出して指導医と一緒に減らす","「断ること・引き継ぐこともチームへの貢献」と捉え直す","自分のケア(食事・睡眠)を予定として先に確保する"]},
+  "弁別性":{catch:"根拠で納得して伸びるタイプ",
+    learn:["ガイドライン・スコア・データで整理すると吸収が速い","指導医の判断根拠を質問して言語化してもらう","曖昧な状況での「割り切り方」を学ぶと一段伸びる"],
+    signs:"対応が機械的になる/批判的な言葉が出やすくなる/曖昧さへの苛立ちが表に出る",
+    care:["「曖昧さは救急の欠陥ではなく本質」と捉え直す","達成を数値で確認できる小さな目標を置き直す","共感がわかない状態が続くときは早めに相談する(疲労のサイン)"]},
+  "凝縮性":{catch:"信念と責任で動くタイプ",
+    learn:["方針の「理由」を確認してから動くと力を発揮する","責任範囲が明確な役割(担当患者・係)を持つと伸びる","納得できないときは、うやむやにせず議論の時間をもらう"],
+    signs:"方針への反発が強くなる/自分のやり方に固執する/周囲の意見を受け入れにくくなる",
+    care:["自分の「譲れない価値」を言葉にして指導医と共有する","反発を感じたら、その背後で何が踏まれたのかを考えてみる","原則と例外を分けて考える時間を取る"]}
+};
+const ITEMS = {
+  "保全性":["初めての処置や症例の前は、手順を確認してからでないと落ち着かない","当直や外来の前には、起こりうる事態を想定して準備しておきたい","うまくいったやり方は、次も再現できるように自分なりに整理・記録している","新しい環境(ローテ先・部署)には、時間をかけて段階的に慣れていきたい","余裕がなくなると、慣れた手順やいつものやり方に固執してしまう","キャパシティを超えると、判断に迷って動きが止まりやすい","予定外の割り込み業務が重なると、ペースが崩れて強く消耗する"],
+  "拡散性":["珍しい症例や新しい手技と聞くと、まず自分がやってみたくなる","綿密に計画を立てるより、動きながら考えるほうが性に合う","面白そうだと思ったら、自分の担当外のことにも関わりたくなる","型どおりの毎日より、何が来るかわからない現場のほうが燃える","同じような業務の繰り返しが続くと、飽きて集中や意欲が落ちる","余裕がなくなると、面倒な業務(書類・サマリー等)を放置しがちだ","追い込まれると、その場を離れたく(投げ出したく)なることがある"],
+  "受容性":["患者や家族の要望には、できる限り応えたいと思う","頼まれごとをされると、自分が忙しくても断りにくい","困っている同僚がいると、自分の業務を後回しにしてでも手伝ってしまう","誰かの役に立てていると実感できるときに、最もやりがいを感じる","限界が近くても、つい「大丈夫です」と言ってしまう","余裕がないときほど、周囲への気遣いで消耗してしまう","疲れているときでも、自分のケアより他人の世話を優先してしまう"],
+  "弁別性":["治療方針は、ガイドラインやデータなどの根拠に基づいて判断したい","「なんとなく」「昔からこうだから」という説明では納得できない","感情論よりも、事実と論理で議論を進めたい","物事の優先順位づけや「やらないことを決める」判断は得意なほうだ","余裕がなくなると、患者やスタッフへの対応が事務的・機械的になりやすい","曖昧な指示や白黒のつかない状況が続くと、苛立ちが表に出やすい","疲れていると、非効率なやり方や人に対して批判的な言葉が出やすい"],
+  "凝縮性":["医療のあり方について、自分なりの譲れない信念がある","自分の責任範囲が明確な仕事のほうが、力を発揮できる","正しくないと思うことには、相手が上級医であっても意見したい","一度引き受けたことは、最後までやり遂げないと気が済まない","余裕がなくなると、自分のやり方へのこだわりが強くなる","方針が二転三転すると、強い不満や反発を感じる","追い込まれると、周囲の意見を受け入れにくくなる"]
+};
+const SCALE = ["あてはまらない","あまりあてはまらない","どちらともいえない","ややあてはまる","あてはまる"];
+
+const QUESTIONS = [];
+for (let r = 0; r < 7; r++) for (const f of FACTORS)
+  QUESTIONS.push({factor:f, text:ITEMS[f][r], stress:r >= 4});
+
+let idx = 0;
+const answers = {};
+
+function show(id){ for(const s of ["intro","quiz","result"]) document.getElementById(s).classList.toggle("hidden", s!==id); window.scrollTo(0,0); }
+function start(){ idx=0; render(); show("quiz"); }
+function restart(){ for(const k in answers) delete answers[k]; idx=0; show("intro"); }
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+function render(){
+  const q = QUESTIONS[idx];
+  document.getElementById("qn").textContent = idx+1;
+  document.getElementById("prog").style.width = (idx/QUESTIONS.length*100)+"%";
+  document.getElementById("stag").classList.toggle("hidden", !q.stress);
+  document.getElementById("qtext").textContent = q.text;
+  document.getElementById("back").classList.toggle("hidden", idx===0);
+  const box = document.getElementById("opts");
+  box.innerHTML = "";
+  SCALE.forEach((label,i)=>{
+    const v = i+1;
+    const b = document.createElement("button");
+    b.className = "opt" + (answers[idx]===v ? " sel" : "");
+    b.innerHTML = '<span class="n">'+v+'</span>'+label;
+    b.onclick = ()=>{
+      answers[idx]=v; b.classList.add("sel");
+      setTimeout(()=>{
+        if(idx+1 < QUESTIONS.length){ idx++; render(); }
+        else showResult();
+      },160);
+    };
+    box.appendChild(b);
+  });
+  window.scrollTo(0,0);
+}
+
+function calc(){
+  const s = {};
+  for(const f of FACTORS) s[f]={total:0,stress:0};
+  QUESTIONS.forEach((q,i)=>{
+    const v = answers[i]||0;
+    s[q.factor].total += v;
+    if(q.stress) s[q.factor].stress += v;
+  });
+  return s;
+}
+
+function drawRadar(scores){
+  const cx=160, cy=132, R=95, n=FACTORS.length;
+  const ang = i => -Math.PI/2 + i*2*Math.PI/n;
+  const pt = (i, r) => [cx + r*Math.cos(ang(i)), cy + r*Math.sin(ang(i))];
+  let svg = "";
+  for(const frac of [0.25,0.5,0.75,1]){
+    const pts = FACTORS.map((_,i)=>pt(i, R*frac).join(",")).join(" ");
+    svg += '<polygon points="'+pts+'" fill="none" stroke="#DDE3DE" stroke-width="1"/>';
+  }
+  FACTORS.forEach((f,i)=>{
+    const [x,y] = pt(i,R);
+    svg += '<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="#DDE3DE" stroke-width="1"/>';
+    const [lx,ly] = pt(i, R+22);
+    svg += '<text x="'+lx+'" y="'+(ly+4)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#12302B">'+f+'</text>';
+  });
+  const poly = FACTORS.map((f,i)=>{
+    const frac = (scores[f].total - 7) / 28; // 7-35 → 0-1
+    return pt(i, R*Math.max(0.04, frac)).join(",");
+  }).join(" ");
+  svg += '<polygon points="'+poly+'" fill="#0E7C66" fill-opacity="0.28" stroke="#0E7C66" stroke-width="2"/>';
+  document.getElementById("radar").innerHTML = svg;
+}
+
+function showResult(){
+  const s = calc();
+  drawRadar(s);
+  const ranked = [...FACTORS].sort((a,b)=>s[b].total-s[a].total);
+  const top2 = ranked.slice(0,2);
+  const cards = document.getElementById("topcards");
+  cards.innerHTML = "";
+  top2.forEach((f,i)=>{
+    const info = INFO[f];
+    const d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML =
+      '<div class="meta"><span class="tag">'+(i===0?"第1因子":"第2因子")+'</span><span class="pts">'+s[f].total+' / 35点</span></div>'+
+      '<div class="factor-title">'+f+'</div>'+
+      '<div class="catch">'+info.catch+'</div>'+
+      '<p class="sec">伸びやすい学び方</p><ul>'+info.learn.map(t=>'<li>'+t+'</li>').join("")+'</ul>'+
+      '<p class="sec warn">疲れたときに出やすいサイン</p><div class="signs">'+info.signs+'</div>'+
+      '<p class="sec">サインが出たときの対処</p><ul>'+info.care.map(t=>'<li>'+t+'</li>').join("")+'</ul>';
+    cards.appendChild(d);
+  });
+  const sb = document.getElementById("sbars");
+  sb.innerHTML = "";
+  const alerts = [];
+  FACTORS.forEach(f=>{
+    const v = s[f].stress, hot = v>=12;
+    if(hot) alerts.push(f);
+    const row = document.createElement("div");
+    row.className = "sbar-row";
+    row.innerHTML = '<span class="f">'+f+'</span>'+
+      '<div class="sbar"><div class="'+(hot?"hot":"")+'" style="width:'+((v-3)/12*100)+'%"></div></div>'+
+      '<span class="sval'+(hot?" hot":"")+'">'+v+'</span>';
+    sb.appendChild(row);
+  });
+  const al = document.getElementById("salert");
+  if(alerts.length){
+    al.classList.remove("hidden");
+    al.innerHTML = '<b style="color:var(--warn)">'+alerts.join("・")+'</b> のストレス反応が高めです。週次の1on1で指導医に共有してみてください。数値は状態のサインであって、評価ではありません。';
+    document.getElementById("stresscard").style.background = "var(--warn-soft)";
+  } else {
+    al.classList.add("hidden");
+    document.getElementById("stresscard").style.background = "var(--card)";
+  }
+  show("result");
+}
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
