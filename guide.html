@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#12302B">
+<title>複合タイプ別 自己理解ガイド</title>
+<style>
+  :root{--ink:#12302B;--surface:#F6F5F0;--card:#FFFFFF;--accent:#0E7C66;--accent-soft:#E3F0EC;
+    --warn:#C4562A;--muted:#68766F;--line:#DDE3DE;--green:#1F6B3A;--blue:#2E5395;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--surface);color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
+    display:flex;justify-content:center;}
+  .col{width:100%;max-width:560px;padding:0 18px 60px;}
+  .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:700;margin:34px 0 6px;}
+  h1{font-size:25px;line-height:1.35;margin:0 0 6px;font-weight:800;}
+  .lead{color:var(--muted);font-size:13.5px;line-height:1.8;margin:8px 0 18px;}
+  .card{background:var(--card);border-radius:16px;border:1px solid var(--line);padding:18px;margin-bottom:14px;}
+  .note{background:var(--accent-soft);border:none;font-size:12px;line-height:1.8;color:var(--ink);}
+  h2.chapter{font-size:19px;font-weight:800;color:var(--ink);border-bottom:2px solid var(--accent);
+    padding-bottom:6px;margin:34px 0 10px;}
+  p.intro{font-size:13.5px;line-height:1.9;margin:0 0 14px;}
+  .type{position:relative;scroll-margin-top:14px;}
+  .type .tno{position:absolute;top:14px;right:16px;font-size:12px;font-weight:800;color:var(--line);}
+  .type h3{font-size:16px;font-weight:800;margin:0 0 2px;}
+  .type .tname{display:block;font-size:14px;color:var(--accent);font-weight:800;margin-top:2px;}
+  .sec{font-size:12.5px;font-weight:800;margin:12px 0 3px;}
+  .sec.g{color:var(--green);} .sec.r{color:var(--warn);} .sec.n{color:var(--ink);} .sec.b{color:var(--blue);}
+  .body{font-size:13.5px;line-height:1.85;margin:0;color:#2A3B36;}
+  .top{display:inline-block;margin-top:12px;font-size:12px;color:var(--muted);text-decoration:none;}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;
+    font-size:11px;margin:10px 0 4px;}
+  th,td{border:1px solid var(--line);padding:7px 3px;text-align:center;line-height:1.4;}
+  th{background:#EAF0EC;font-weight:800;font-size:11px;}
+  th.corner{font-size:10px;color:var(--muted);}
+  td a{color:var(--accent);text-decoration:none;font-weight:700;}
+  td.dash{color:var(--line);}
+  .foot{font-size:11px;color:var(--muted);line-height:1.8;margin-top:26px;}
+  .backapp{display:block;text-align:center;background:var(--ink);color:#fff;border-radius:12px;
+    padding:14px 0;font-size:15px;font-weight:700;text-decoration:none;margin-top:20px;}
+</style>
+</head>
+<body>
+<div class="col">
+  <div class="eyebrow">FUJISAWA SHONANDAI ER</div>
+  <h1>複合タイプ別<br>自己理解ガイド</h1>
+  <p class="lead">セルフチェックで出た上位2因子の組み合わせ(順序込み・全20タイプ)ごとに、ストレス反応の傾向と、自分への負荷のかけ方をまとめた本人向けガイドです。</p>
+
+  <div class="card">
+    <div style="font-size:13px;line-height:1.9">
+      <b>読み方</b>：第1因子が主旋律(普段の基調)、第2因子が伴奏(発揮のされ方)。同じ2因子でも順序が違えば別タイプです。平時は第1因子の顔でも、強いストレス下では第2因子の反応が先に出ることがあります。<br><br>
+      <b>負荷の共通3原則</b>：①挑戦(新しい症例・裁量・責任)は成長の燃料、我慢(理不尽・曖昧な指示・際限ない雑務)はただの消耗——増やすのは前者だけ。②一度に上げる負荷は1種類だけ。③サインが2週続いたら一段戻す(戻すのは後退ではなく助走)。
+    </div>
+  </div>
+
+  <h2 class="chapter" id="matrix">20タイプ早見表(タップでジャンプ)</h2>
+  <table><tr><th class="corner">第1＼第2</th><th>凝縮</th><th>受容</th><th>弁別</th><th>拡散</th><th>保全</th></tr><tr><th>凝縮性</th><td class="dash">―</td><td><a href="#t-gyo-ju">面倒見のいい親分</a></td><td><a href="#t-gyo-ben">信念の論客</a></td><td><a href="#t-gyo-kaku">情熱の開拓者</a></td><td><a href="#t-gyo-ho">筋を通す職人</a></td></tr><tr><th>受容性</th><td><a href="#t-ju-gyo">献身の信念家</a></td><td class="dash">―</td><td><a href="#t-ju-ben">静かな調整役</a></td><td><a href="#t-ju-kaku">ムードメーカー</a></td><td><a href="#t-ju-ho">堅実サポーター</a></td></tr><tr><th>弁別性</th><td><a href="#t-ben-gyo">原理原則のジャッジ</a></td><td><a href="#t-ben-ju">冷静なサポーター</a></td><td class="dash">―</td><td><a href="#t-ben-kaku">クールな実験家</a></td><td><a href="#t-ben-ho">几帳面なロジシャン</a></td></tr><tr><th>拡散性</th><td><a href="#t-kaku-gyo">突破型のリーダー</a></td><td><a href="#t-kaku-ju">行動派ムードメーカー</a></td><td><a href="#t-kaku-ben">合理的チャレンジャー</a></td><td class="dash">―</td><td><a href="#t-kaku-ho">地に足の挑戦者</a></td></tr><tr><th>保全性</th><td><a href="#t-ho-gyo">堅実な番人</a></td><td><a href="#t-ho-ju">静かな積み上げ職人</a></td><td><a href="#t-ho-ben">慎重アナリスト</a></td><td><a href="#t-ho-kaku">慎重な冒険者</a></td><td class="dash">―</td></tr></table>
+
+  <h2 class="chapter">第1因子が凝縮性のあなた</h2>
+<p class="intro">第1因子が凝縮性のあなたの主旋律は「信念と責任」。納得したことには強い推進力を発揮し、最後までやり遂げる。第2因子がその発揮のされ方を決める。</p>
+
+<section class="card type" id="t-gyo-ju">
+  <div class="tno">1</div>
+  <h3>凝縮性 × 受容性<span class="tname">面倒見のいい親分</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">筋を通しながら人の面倒を見る、兄貴分・姉御肌。患者にも後輩にも誠実で、「この人についていきたい」と思わせる引力がある。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">まず自分のやり方への固執が強まり、続いて頼まれごとを責任ごと抱え込む。反発と自己犠牲が同居するため消耗が深く、周囲には「怒りながら全部やっている」ように見える。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">主担当患者＋後輩の世話役など「責任ある世話」の役割が最も伸びる。引き受ける前に「納得してから受ける」を自分に許可すること。避けたいのは、納得のないまま責任だけ背負う状態。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「納得できていない」を溜めずに早めに言葉にする。抱えた仕事の棚卸しを週1回、自分の習慣にする。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-gyo-ben">
+  <div class="tno">2</div>
+  <h3>凝縮性 × 弁別性<span class="tname">信念の論客</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">信念をデータで語れる。カンファレンスでの発言力があり、納得すれば全型中で最強の推進力を発揮する。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">方針への反発が硬直化し、根拠のない指示への苛立ち・批判的な言葉が増える。「正しさ」で武装して孤立しやすい。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">方針立案、症例検討会での「あえて反対意見を述べる役」、プロトコル改善の責任者が効く。避けたいのは、理由の説明がないまま方針が変わる環境に黙って耐え続けること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">反発を感じたら「どの価値を踏まれたのか」を言語化する。議論の時間を自分から申し込んでよい——それはわがままではなく、この型の健全な燃料補給である。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-gyo-kaku">
+  <div class="tno">3</div>
+  <h3>凝縮性 × 拡散性<span class="tname">情熱の開拓者</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">信じた方向へ猛然と進む突破力。新しい取り組みの旗振り役で、停滞した空気を変える力がある。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">こだわりと衝動が合流し、独断・強行突破に傾く。周囲の意見が入らなくなり、ルールの軽視が事故リスクに直結する。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">新規プロジェクトの責任者が最適。裁量と責任をセットで持つと最も燃える。避けたいのは、細かい統制と方針の朝令暮改が併存する環境。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">追い込まれたときほど「実施前に一報」を自分ルールにする。強行したくなった瞬間が、一呼吸のタイミング。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-gyo-ho">
+  <div class="tno">4</div>
+  <h3>凝縮性 × 保全性<span class="tname">筋を通す職人</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">原則を守り、決めたことを確実にやり切る。手順の番人であり、品質のばらつきが最も少ないタイプのひとつ。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">自分のやり方と手順への二重の固執が起こり、変化への抵抗が強くなる。想定外の連続では動きが止まることもある。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">手順・プロトコル整備の責任者が天職。挑戦は「予告付きで一段上」を守る。避けたいのは、予告なしの方針転換が続く状況。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">変化に直面したら「守るべき原則」と「変えてよい手段」を紙に書いて分ける。抵抗感は敵ではなく、守りたいものの在り処を教えてくれるセンサー。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section><h2 class="chapter">第1因子が受容性のあなた</h2>
+<p class="intro">第1因子が受容性のあなたの主旋律は「受け入れる力と貢献」。関係性の中で力を発揮し、チームに欠かせない存在になる。共通の注意点はタスクの総量——自分では膨張に気づきにくい。</p>
+
+<section class="card type" id="t-ju-gyo">
+  <div class="tno">5</div>
+  <h3>受容性 × 凝縮性<span class="tname">献身の信念家</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">人のために筋を通す。患者の権利や尊厳に関わる場面で静かな強さを見せる、患者アドボケイトの資質。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">普段は抱え込みで消耗が進むが、譲れない一線を踏まれた瞬間、周囲が驚くほど強い反発が出る。この落差自体がこの型のサイン。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">患者・家族対応の要となる役割が効く。避けたいのは、総量無制限の依頼と、価値観に反する業務が同時に来る状態。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">つらさを感じたら「これは信念に関わる問題か、ただの疲労か」を仕分ける。前者なら対話を申し込み、後者なら量を減らす——対処が真逆になる。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ju-ben">
+  <div class="tno">6</div>
+  <h3>受容性 × 弁別性<span class="tname">静かな調整役</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">気配りと合理性を併せ持ち、多職種を静かにまとめる。調整能力はチームの見えないインフラになっている。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">表面は受容しながら、内心の信頼と納得を静かに引き下げていく。「相談する気が起きなくなってきた」と感じたら、それが自分のサイン。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">カンファレンスの進行役、多職種調整の担当が効く。判断や違和感を言語化する課題を自分に課すと一段伸びる。避けたいのは、理不尽への我慢を常態化させること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「今週、内心引っかかったこと」を週1回、必ず1つ口に出す。聞かれれば答えられるのだから、聞かれる場を自分で確保する。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ju-kaku">
+  <div class="tno">7</div>
+  <h3>受容性 × 拡散性<span class="tname">ムードメーカー</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">明るさとフットワークでERの空気を変える。患者にもスタッフにも好かれ、頼まれごとが自然に集まってくる。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">断れないまま、飽きた仕事も抱え続けて書類が崩れていく。笑顔のまま消耗が進むため、周囲は最後まで気づかない。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">新しい仕事は「担当」として名前をつけて持つと輝く。避けたいのは、頼まれごとだけで一日が埋まり、挑戦の空きがなくなる状態。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">書類・サマリーの滞留は自分のストレス計。抱えているタスクが3つを超えたら、指導医に総量の相談をする——それは弱音ではなく運用報告である。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ju-ho">
+  <div class="tno">8</div>
+  <h3>受容性 × 保全性<span class="tname">堅実サポーター</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">型を守り、人に尽くす。当科で最も多いと想定される複合型で、周囲から最も信頼されるタイプでもある。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">「大丈夫です」という言葉と萎縮が同時に進行し、サインがほとんど外に出ない。限界は突然の虚脱として現れやすい。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">挑戦は「予告付き＋手順付き＋誰かの役に立つ文脈」の3点セットで受けると最も伸びる。避けたいのは、準備なしの丸投げと依頼の積み上げが重なること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">週1回のタスク棚卸しと、「今週初めてできたこと」の記録を習慣にする。「大丈夫です」と言いそうになったら、代わりに事実(残タスク数・睡眠時間)を伝える練習を。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section><h2 class="chapter">第1因子が弁別性のあなた</h2>
+<p class="intro">第1因子が弁別性のあなたの主旋律は「根拠と判断」。データで考え、優先順位をつける力がチームの意思決定を支える。共通の注意点は、疲労がまず「共感の低下」として現れること。</p>
+
+<section class="card type" id="t-ben-gyo">
+  <div class="tno">9</div>
+  <h3>弁別性 × 凝縮性<span class="tname">原理原則のジャッジ</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">基準で判断し、決めたら揺らがない安定感。トリアージや資源配分の判断に向き、混乱時の錨になる。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">批判的な言葉と自説への固執が合流し、周囲がミスや疑問を報告しにくい空気を作ってしまう。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">判断基準づくり・質改善活動の担当が効く。避けたいのは、根拠を示されない業務命令が積み上がる環境。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">自分の言葉が辛辣になってきたら疲労のサイン。「最近、患者に共感できているか」を自己点検の定番質問にする。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ben-ju">
+  <div class="tno">10</div>
+  <h3>弁別性 × 受容性<span class="tname">冷静なサポーター</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">合理的だが人への配慮を忘れない。難しい内容を相手に合わせて説明する力があり、ICや家族説明で信頼される。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">対応が機械的に振れていく一方で、頼まれごとは断れない。「効率化で自分を守ろうとし始めたら」黄信号。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">患者説明・IC同席・多職種への橋渡しなど「説明役」が効く。避けたいのは、非効率と感じる雑務を断れずに抱え込む状態。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「断ることも合理的判断のうち」と自分に許可を出す。あなたの合理性はタスクの取捨選択にも使ってよい。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ben-kaku">
+  <div class="tno">11</div>
+  <h3>弁別性 × 拡散性<span class="tname">クールな実験家</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">仮説を立てて即検証する。新しい手技やツールの導入・検証に強く、現場を静かにアップデートしていく。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">シニカル化と飽きが合流し、「くだらない」と切り捨てて心が現場から離脱していく。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">業務改善の実験担当、グレーゾーン症例の判断が効く。避けたいのは、意味を感じられないルーチンを黙って続けること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「くだらない」と感じたものをメモに溜め、改善提案に変換する。あなたの不満は、質改善の原石である。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ben-ho">
+  <div class="tno">12</div>
+  <h3>弁別性 × 保全性<span class="tname">几帳面なロジシャン</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">根拠と手順の二段構えで、ミスが最も少ないタイプ。プロトコルの濃い領域(外傷初期対応など)で立ち上がりが速い。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">確実性への要求が過剰になり、確認過多・過剰検査に流れる。手順も基準もない状況に時間圧が重なるとフリーズしやすい。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">基準の明確な領域で自信をつけ、そこから不確実な領域へ段階的に踏み出す順番が合う。避けたいのは、準備ゼロの丸投げ。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「確認したい衝動」が普段より増えていたら負荷過多のサイン。迷ったときは「手順がないのが不安か、基準がないのが不安か」を仕分けると対処が見える。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section><h2 class="chapter">第1因子が拡散性のあなた</h2>
+<p class="intro">第1因子が拡散性のあなたの主旋律は「動きながら考える力」。初見に強く、救急に向いた資質を持つ。共通の注意点は、消耗がまず「飽き・逃避」の形で現れること——それは怠けではなくサインである。</p>
+
+<section class="card type" id="t-kaku-gyo">
+  <div class="tno">13</div>
+  <h3>拡散性 × 凝縮性<span class="tname">突破型のリーダー</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">動きながら旗を立てる。多重救急や災害級の混乱など、正解のない危機で最も力を発揮する。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">独断と強行突破に傾き、反発が攻撃的になる。ルールを「遅い」と感じて飛ばすことが事故リスクになる。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">危機対応の前線、新企画の立ち上げが効く。避けたいのは、平時の細かい統制で衝動と信念を同時に縛られること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「強行したくなった瞬間＝一呼吸して一報」を自分ルールに。あなたのスピードは、一報を挟んでもまだ十分速い。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-kaku-ju">
+  <div class="tno">14</div>
+  <h3>拡散性 × 受容性<span class="tname">行動派ムードメーカー</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">動いて場を明るくする。患者に好かれ、現場の空気を軽くする力は数値化されないが確かな戦力。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">「逃げ出したい」のに「頼まれると断れない」の板挟みになり、限界が突然の虚脱として現れる。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">新しい担当・イベント係など、動きと貢献が両立する役割が効く。避けたいのは、単調業務と依頼の山が同時に積まれる状態。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「逃げたい」という感覚が湧いたら、それは重要なサイン。恥ではないので早めに口に出す。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-kaku-ben">
+  <div class="tno">15</div>
+  <h3>拡散性 × 弁別性<span class="tname">合理的チャレンジャー</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">初見に強く、判断が速い。救急適性の高い組み合わせで、動きながら根拠で刈り込んでいける。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">逃避とシニカル化が合流し、「この科は非効率でつまらない」という総括に飛ぶ。この言葉が出た時点で、すでに消耗は進んでいる。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">グレーゾーン判断、複数症例の並行管理、改善提案の担当が効く。避けたいのは、ルーチン漬けの期間が続くこと——業務量が軽くても消耗する。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">書類の滞留と「無駄」という口癖が自分のストレス計。「一番無駄だと感じる業務」を提案に変えるところまでやると、不満が戦力に変わる。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-kaku-ho">
+  <div class="tno">16</div>
+  <h3>拡散性 × 保全性<span class="tname">地に足の挑戦者</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">挑戦したい気持ちと準備を怠らない慎重さを両方持つ、アクセルとブレーキのバランス型。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">「やってみたい」と「準備不足が怖い」の板挟みで空回りし、動けない自分への自己嫌悪が重なる。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">「準備時間つきの新規挑戦」が最適解。明日の新手技を今日予告してもらい、型を一枚作ってから跳ぶ。避けたいのは、準備ゼロの飛び込みの連続。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">空回り感が出たら、飛ぶのをやめるのではなく「準備の型を1枚作る」に切り替える。あなたのブレーキは欠点ではなく装備である。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section><h2 class="chapter">第1因子が保全性のあなた</h2>
+<p class="intro">第1因子が保全性のあなたの主旋律は「積み上げと再現性」。派手さはなくとも、12週の終わりに最も確実に力がついているのはこのタイプである。共通の注意点は、消耗がまず「確認の増加・萎縮」として現れること。</p>
+
+<section class="card type" id="t-ho-gyo">
+  <div class="tno">17</div>
+  <h3>保全性 × 凝縮性<span class="tname">堅実な番人</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">手順と原則の守護者。医療安全・感染対策のような「守りの要」に最も向いた資質。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">変化への拒否が強固になり、新方式への抵抗が人との対立に発展することがある。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">手順整備・安全チェックの責任者が効く。変化を受け入れるときは「理由＋移行期間」をセットで求めてよい。避けたいのは、理由なき変更を我慢して受け入れ続けること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">抵抗感が湧いたら、その背後の「守りたいもの」を言語化する。それは交渉の材料になり、ただの頑固と区別してもらえる。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ho-ju">
+  <div class="tno">18</div>
+  <h3>保全性 × 受容性<span class="tname">静かな積み上げ職人</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">着実さと気配りを併せ持つ、病棟業務の背骨のような存在。頼まれた仕事の完遂率が高い。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">萎縮と抱え込みが静かに同時進行する。堅実サポーター(受容×保全)と似るが、こちらは先に萎縮(確認の増加・新規回避)が出やすい。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">挑戦は予告付きで、量は控えめに新規性を確保する。避けたいのは、複数の新しい業務と依頼が同時に積まれること。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">「これで合ってますか」が増えている自覚が出たら、それをサインとして扱い、負荷を一段戻す相談をする。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ho-ben">
+  <div class="tno">19</div>
+  <h3>保全性 × 弁別性<span class="tname">慎重アナリスト</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">手順と根拠の両方で武装し、序盤の立ち上がりが全型中で最も安定する。マニュアルとガイドラインの吸収が速い。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">手順も基準もない状況に時間圧が重なるとフリーズしやすく、不安を過剰検査で埋めようとする。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">プロトコルの濃い領域(外傷対応など)で自信をつけ、グレーゾーンへ段階的に進む順番が最適。避けたいのは、いきなりの不確実領域への放り込み。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">判断に迷ったら「手順がない不安か、基準がない不安か」を自分で仕分ける。前者は型を要求してよく、後者は割り切りの練習と捉える。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+<section class="card type" id="t-ho-kaku">
+  <div class="tno">20</div>
+  <h3>保全性 × 拡散性<span class="tname">慎重な冒険者</span></h3>
+  <p class="sec g">平時のあなた</p><p class="body">準備した上で新しいことに踏み出せる。積み上げに飽きが来る前に自分から変化を取りに行ける、持続可能な成長型。</p>
+  <p class="sec r">ストレスがかかると</p><p class="body">固執と飽きが交互に現れて安定せず、周囲から「気分屋」に見えることがある。本人の中では「変えたいのに怖い」が揺れている。</p>
+  <p class="sec n">自分への負荷のかけ方</p><p class="body">「準備期間つきの新規挑戦」をリズムよく(数週おきに)入れるのが最適。避けたいのは、長い停滞と急な丸投げの繰り返し。</p>
+  <p class="sec b">セルフケアと相談</p><p class="body">調子が揺れたら「今の主役は飽きか、不安か」を見る。飽きなら新規性を、不安なら型を、自分に補給する。</p>
+  <a class="top" href="#matrix">↑ 一覧に戻る</a>
+</section>
+
+  <div class="card note">
+    本ガイドはFFS理論(株式会社ヒューマンロジック研究所)の5因子の枠組みを参考に当科が独自作成した教育用資料であり、公式診断とは関係ありません。タイプは「学び方とストレス反応の傾向」であって能力や適性の評価ではなく、ローテーション評価にも一切使用しません。記述に違和感があれば、あなたの自己認識のほうを信じてください。
+  </div>
+  <p class="foot">使いどころ:週次の1on1にこのページを開いて持ち込み、「自分のタイプだとこういうサインが出やすいらしいのですが、今週どう見えましたか」と指導医に聞いてみてください。それがこの仕組みの最も正しい使い方です。</p>
+  <a class="backapp" href="./index.html">← セルフチェックに戻る</a>
+</div>
+</body>
+</html>
