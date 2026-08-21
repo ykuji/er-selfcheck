@@ -63,6 +63,18 @@
   .meta .tag{font-size:11px; font-weight:800; color:var(--accent); letter-spacing:.15em;}
   .meta .pts{font-size:12px; color:var(--muted);}
   .hidden{display:none;}
+
+  /* ---- PDF保存(印刷)用 ---- */
+  #printheader{display:none;}
+  @media print{
+    body{background:#fff;}
+    .col{max-width:100%; padding:0;}
+    .btn,.ghost,#savecard{display:none !important;}
+    .card{border:1px solid #bbb; break-inside:avoid; margin-bottom:10px;}
+    #printheader{display:block; border-bottom:2px solid #12302B; padding:4px 2px 10px; margin-bottom:12px;}
+    #printheader .ttl{font-size:18px; font-weight:800; color:#12302B;}
+    #printheader .meta{font-size:13px; margin-top:6px; display:flex; gap:24px;}
+  }
 </style>
 </head>
 <body>
@@ -107,6 +119,10 @@
 
   <!-- 結果 -->
   <div id="result" class="hidden">
+    <div id="printheader">
+      <div class="ttl">救急版 特性セルフチェック ― 結果記録</div>
+      <div class="meta"><span>氏名：<span id="pname_out">　　　　　　</span></span><span>実施日：<span id="pdate_out"></span></span></div>
+    </div>
     <div style="padding:28px 2px 12px">
       <div class="eyebrow">RESULT</div>
       <h1 style="font-size:23px">あなたの5因子プロフィール</h1>
@@ -137,6 +153,14 @@
     <div class="foot">
       本結果は参考情報です(妥当性未検証・教育用)。正式な型の確認は書籍版FFS診断で行います。
       結果は保存されていません。スクリーンショットで残す場合は取り扱いにご注意ください。
+    </div>
+    <div class="card" id="savecard">
+      <div style="font-size:13px; font-weight:800; margin-bottom:8px">結果を記録に残す</div>
+      <input id="pname" type="text" placeholder="氏名(記録に印字されます)" style="width:100%; padding:12px; font-size:15px; border:1px solid var(--line); border-radius:10px; margin-bottom:10px; font-family:inherit; background:#fff; color:var(--ink);">
+      <button class="btn" style="background:var(--accent)" onclick="saveAsPdf()">結果をPDFとして保存</button>
+      <div style="font-size:11px; color:var(--muted); line-height:1.7; margin-top:8px">
+        印刷画面が開いたら、送信先/プリンタで「PDFに保存」を選んでください(iPhoneは共有メニュー→プリント→プレビューを長押し/ピンチアウトで保存できます)。保存したPDFの取り扱いにはご注意ください。
+      </div>
     </div>
     <button class="btn" onclick="restart()">もう一度やる</button>
   </div>
@@ -246,6 +270,14 @@ function drawRadar(scores){
   }).join(" ");
   svg += '<polygon points="'+poly+'" fill="#0E7C66" fill-opacity="0.28" stroke="#0E7C66" stroke-width="2"/>';
   document.getElementById("radar").innerHTML = svg;
+}
+
+function saveAsPdf(){
+  const n = document.getElementById("pname").value.trim();
+  document.getElementById("pname_out").textContent = n || "　　　　　　";
+  const d = new Date();
+  document.getElementById("pdate_out").textContent = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+  window.print();
 }
 
 function showResult(){
